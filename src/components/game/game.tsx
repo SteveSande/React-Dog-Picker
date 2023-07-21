@@ -1,6 +1,6 @@
 function Game () {
     return (
-        <h1>pick</h1>
+        <h1>pickd</h1>
     )
 }
 

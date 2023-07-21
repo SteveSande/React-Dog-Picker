@@ -1,13 +1,13 @@
 import './App.css'
-import Game from './components/Game'
-import Instructions from './components/Instructions'
-import Title from './components/Title'
+import Customizer from './components/customizer/customizer'
+import Game from './components/game/game'
+import Header from './components/header/header'
 
 function App() {
   return (
     <>
-      <Title />
-      <Instructions />
+      <Header />
+      <Customizer />
       <Game />
     </>
   )
