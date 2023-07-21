@@ -4,30 +4,5 @@
 
 img {
   max-height: 300px;
+  padding: 10px;
 }
-
-.border {
-    --b: 5px;  /* border thickness */
-    --s: 30px; /* size of the dashes */
-    --c1: #FFFFFF;
-    --c2: #FF0000;
-    
-    width: fit-content;
-    aspect-ratio: 1;
-    position: relative;
-  }
-  .border::before {
-    content:"";
-    position: absolute;
-    inset: 0;
-    padding: var(--b);
-    background: 
-      repeating-conic-gradient(var(--c1) 0 25%,var(--c2) 0 50%) 
-      0 0/var(--s) var(--s) round;
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-            mask-composite: exclude;
-    pointer-events: none;
-  }
