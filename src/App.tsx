@@ -5,11 +5,11 @@ import Header from './components/header/header'
 
 function App() {
   return (
-    <>
+    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
       <Header />
-      <Customizer />
+      {/* <Customizer /> */}
       <Game />
-    </>
+    </div>
   )
 }
 
