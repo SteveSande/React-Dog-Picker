@@ -1,4 +1,6 @@
 .dogs {
     display: flex;
+    justify-content: center;
     padding: 10px;
+    max-width: 100%;
 }

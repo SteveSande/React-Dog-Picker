@@ -1,8 +1,8 @@
-.picture {
-  padding: 10px;
-}
 
-img {
-  max-height: 300px;
-  padding: 10px;
+
+.image {
+  height: 400px;
+  width: 400px;
+  object-fit: contain;
+  padding: 5px;
 }

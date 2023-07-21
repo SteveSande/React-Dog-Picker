@@ -1,20 +1,20 @@
 import DogCSS from './dog.module.css'
-import Image from "react-bootstrap/Image"
 
 interface info {
     image: string;
     setFave: (image: string) => void;
+    picked: boolean;
+    setPicked: (toggle: boolean) => void
 }
 
 function Dog (props:info) {
     function setFave() {
         props.setFave(props.image);
+        props.setPicked(!props.picked);
     }
     
     return (
-        <>
-            <Image src={props.image} onClick={setFave}></Image>   
-        </>
+        <img className={DogCSS.image} src={props.image} onClick={setFave}></img>   
     )
 }
 
