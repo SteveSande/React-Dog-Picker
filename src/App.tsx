@@ -2,7 +2,7 @@ import './App.css'
 import Game from './components/game/game'
 import Header from './components/header/header'
 
-function App() {
+export default function App() {
   return (
     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
       <Header />
@@ -10,5 +10,3 @@ function App() {
     </div>
   )
 }
-
-export default App

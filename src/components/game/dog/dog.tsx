@@ -5,7 +5,7 @@ interface info {
   onPress: () => void;
 }
 
-function Dog(props: info) {
+export default function Dog(props: info) {
   return (
     <img
       className={DogCSS.image}
@@ -15,5 +15,3 @@ function Dog(props: info) {
     </img>
   )
 }
-
-export default Dog
