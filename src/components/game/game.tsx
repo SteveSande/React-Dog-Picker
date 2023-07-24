@@ -17,11 +17,19 @@ function Game() {
       });
   }, []);
 
-  const onDogPick = (image: any) => {
+  const onDogPick = (image: string) => {
     setFave(image);
-    setImages(dogs.slice(count, count + 2));
-    setCount(count+2)
-  }
+    setCount(count + 1);
+    setImages([fave, dogs[count]]);
+  };
+
+  useEffect(() => {
+    setImages([fave, dogs[count]]);
+  }, [fave]);
+    
+  useEffect(() => {
+    setImages([fave, dogs[count]]);
+  }, [count]);
 
   if (images) {
     return (
