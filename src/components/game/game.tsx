@@ -20,9 +20,9 @@ function Game() {
   const onDogPick = (image: string) => {
     setFave(image);
     setCount(count + 1);
-    setImages([fave, dogs[count]]);
   };
 
+  // ensure images is up
   useEffect(() => {
     setImages([fave, dogs[count]]);
   }, [fave]);
