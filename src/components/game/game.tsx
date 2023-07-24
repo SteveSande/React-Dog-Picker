@@ -5,7 +5,7 @@ import { useState, useEffect} from 'react'
 function Game() {
   const [dogs, setDogs] = useState<string[]>([]);
   const [fave, setFave] = useState<string>('');
-  const [count, setCount] = useState<number>(2);
+  const [count, setCount] = useState<number>(1);
   const [images, setImages] = useState<string[]>();
 
   useEffect(() => {
@@ -31,7 +31,7 @@ function Game() {
     setImages([fave, dogs[count]]);
   }, [count]);
 
-  if (images) {
+  if (images && count < 10) {
     return (
       <div className={GameCSS.dogs}>
         {
@@ -46,7 +46,20 @@ function Game() {
       </div>
     )
   }
-  return null;
+  else if (count >= 10) {
+    return (
+        <div className={GameCSS.dogs}>
+            <Dog 
+                image={fave}
+                onPress={() => onDogPick(fave)}
+            />
+        </div>
+    )
+  }
+  else {
+    return null;  
+  }
+  
 }
 
 export default Game
