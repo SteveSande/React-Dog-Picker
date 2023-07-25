@@ -3,77 +3,65 @@ import Dog from "./dog/dog"
 import { useState, useEffect} from 'react'
 import Names from '../../assets/dognames.json'
 
-type Dog = {
+type DogType = {
   image: string;
   name: string;
 };
 
 export default function Game() {
-  const [dogs, setDogs] = useState<Dog[]>([]);
-  const [fave, setFave] = useState<string>('');
+  const [dogs, setDogs] = useState<DogType[]>([]);
+  const [fave, setFave] = useState<DogType>({image: '', name: ''});
   const [count, setCount] = useState<number>(1);
-  const [images, setImages] = useState<string[]>();
+  const [matchup, setMatchup] = useState<DogType[]>();
 
   // get an array of urls for dog pictures from the API
+  // associate each url with a name to fill the dogs array
   useEffect(() => {
     fetch('https://dog.ceo/api/breeds/image/random/10')
       .then(response => response.json())
       .then(data => {
-        let dogsToCopy: Dog[] = [];
+        let dogsToCopy: DogType[] = [];
         const dogPics = data.message;
         dogPics.forEach((pic: string) => {
           const randomIndex = Math.floor(Math.random() * Names.length);
-          const dog: Dog = {
+          const dog: DogType = {
             image: pic,
             name: Names[randomIndex]
           }
           dogsToCopy.push(dog);
         });
-        console.log(dogsToCopy);
         setDogs(dogsToCopy)
-        setImages(data.message.slice(0,2));
+        setMatchup(dogsToCopy.slice(0,2));
       });
   }, []);
 
   // this is executed when the user has selected a dog
-  // image is the url to the dog they clicked on
-  const onDogPick = (image: string) => {
-    setFave(image);
+  // pick is the dog they clicked on
+  const onDogPick = (pick: DogType) => {
+    setFave(pick);
     setCount(count + 1);
   };
 
-  // ensure images is updated after fave is updated
+  // ensure matchup is updated after fave is updated
   useEffect(() => {
-    setImages([fave, dogs[count]]);
-  }, [fave]);
-    
-  // ensure images is updated after count is updated
-  useEffect(() => {
-    setImages([fave, dogs[count]]);
-  }, [count]);
+    fave.image != '' && setMatchup([fave, dogs[count]]);
+  }, [fave, count]);
 
-  // return head-to-heads until all pictures have been seen
-  // once all pictures have been seen just return the fave
-  if (images && count < 10) {
+  // return matchups until all dogs have been seen
+  // once all dogs have been seen just return the fave
+  if (matchup && count < 10) {
     return (
-      <div className={GameCSS.dogs}>
-        {
-          images.map(image => 
-          <Dog
-            key={image}
-            image={image}
-            onPress={() => onDogPick(image)}
-          />
-          )
-        }
+      <div className={GameCSS.dogs}>      
+        <Dog dog={matchup[0]} onPress={() => onDogPick(matchup[0])} />
+        <Dog dog={matchup[1]} onPress={() => onDogPick(matchup[1])} />    
       </div>
     )
   }
-  else if (count >= 10) {
+  else if (matchup && count >= 10) {
     return (
         <div className={GameCSS.dogs}>
             <Dog 
-                image={fave}
+                dog={fave}
                 onPress={() => onDogPick(fave)}
             />
         </div>

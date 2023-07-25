@@ -1,17 +1,30 @@
 import DogCSS from './dog.module.css'
 
 interface info {
-  image: string;
+  dog: DogType;
   onPress: () => void;
 }
 
+type DogType = {
+  image: string;
+  name: string;
+};
+
 export default function Dog(props: info) {
   return (
-    <img
-      className={DogCSS.image}
-      src={props.image}
-      onClick={props.onPress}
-    >
-    </img>
+    <div className={DogCSS.dog}>
+      <img
+        className={DogCSS.image}
+        src={props.dog.image}
+        onClick={props.onPress}
+        onError={({ currentTarget }) => {
+          currentTarget.onerror = null; // prevents looping
+          currentTarget.alt='Image Not Found - Bad URL';
+        }}
+      >
+      </img>
+      {props.dog.name}
+
+    </div>
   )
 }
