@@ -1,4 +1,4 @@
-import DogCSS from './dog.module.css'
+import DogCSS from "./dog.module.css";
 
 interface info {
   dog: DogType;
@@ -19,12 +19,10 @@ export default function Dog(props: info) {
         onClick={props.onPress}
         onError={({ currentTarget }) => {
           currentTarget.onerror = null; // prevents looping
-          currentTarget.alt='Image Not Found - Bad URL';
+          currentTarget.alt = "Image Not Found - Bad URL";
         }}
-      >
-      </img>
+      ></img>
       {props.dog.name}
-
     </div>
-  )
+  );
 }
