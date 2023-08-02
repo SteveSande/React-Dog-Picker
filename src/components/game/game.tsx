@@ -13,6 +13,7 @@ export default function Game() {
   const [fave, setFave] = useState<DogType>({image: '', name: ''});
   const [count, setCount] = useState<number>(1);
   const [matchup, setMatchup] = useState<DogType[]>();
+  const [loading, setLoading] = useState<boolean>(true);
 
   // get an array of urls for dog pictures from the API
   // associate each url with a name to fill the dogs array
@@ -32,6 +33,7 @@ export default function Game() {
         });
         setDogs(dogsToCopy)
         setMatchup(dogsToCopy.slice(0,2));
+        setLoading(false);
       });
   }, []);
 
@@ -49,12 +51,19 @@ export default function Game() {
 
   // return matchups until all dogs have been seen
   // once all dogs have been seen just return the fave
-  if (matchup && count < 10) {
+  if (loading) {
+    return (
+      <div className={GameCSS.dogs}>
+        <h1>Loading...</h1>
+      </div>
+    )
+  }
+  else if (matchup && count < 10) {
     return (
       <div className={GameCSS.dogs}>
         {
-          matchup.map(dog =>
-            <Dog dog={dog} onPress={() => onDogPick(dog)} />
+          matchup.map((dog, index) =>
+            <Dog key={index} dog={dog} onPress={() => onDogPick(dog)} />
           )
         }
       </div>
