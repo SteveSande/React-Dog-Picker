@@ -39,7 +39,7 @@ export default function Game() {
   // pick is the dog they clicked on
   const onDogPick = (pick: DogType) => {
     setFave(pick);
-    setCount(count + 1);
+    setCount((prevCount) => prevCount + 1);
   };
 
   // ensure matchup is updated after fave is updated
@@ -51,20 +51,23 @@ export default function Game() {
   // once all dogs have been seen just return the fave
   if (matchup && count < 10) {
     return (
-      <div className={GameCSS.dogs}>      
-        <Dog dog={matchup[0]} onPress={() => onDogPick(matchup[0])} />
-        <Dog dog={matchup[1]} onPress={() => onDogPick(matchup[1])} />    
+      <div className={GameCSS.dogs}>
+        {
+          matchup.map(dog =>
+            <Dog dog={dog} onPress={() => onDogPick(dog)} />
+          )
+        }
       </div>
     )
   }
   else if (matchup && count >= 10) {
     return (
-        <div className={GameCSS.dogs}>
-            <Dog 
-                dog={fave}
-                onPress={() => onDogPick(fave)}
-            />
-        </div>
+      <div className={GameCSS.dogs}>
+          <Dog 
+              dog={fave}
+              onPress={() => onDogPick(fave)}
+          />
+      </div>
     )
   }
   else {
