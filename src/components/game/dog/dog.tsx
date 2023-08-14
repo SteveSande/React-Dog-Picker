@@ -5,11 +5,6 @@ interface info {
   onPress: () => void;
 }
 
-type DogType = {
-  image: string;
-  name: string;
-};
-
 export default function Dog(props: info) {
   return (
     <div className={DogCSS.dog}>

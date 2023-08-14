@@ -3,11 +3,6 @@ import Dog from "./dog/dog";
 import { useState, useEffect } from "react";
 import Names from "../../assets/dognames.json";
 
-type DogType = {
-  image: string;
-  name: string;
-};
-
 export default function Game() {
   const [dogs, setDogs] = useState<DogType[]>([]);
   const [fave, setFave] = useState<DogType>({ image: "", name: "" });
