@@ -1,6 +1,6 @@
 import "./App.css";
-import Game from "./components/game/game";
-import Header from "./components/header/header";
+import Game from "./components/game/Game";
+import Header from "./components/header/Header";
 
 export default function App() {
   return (

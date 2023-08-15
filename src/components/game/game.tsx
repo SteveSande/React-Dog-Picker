@@ -1,9 +1,16 @@
 import GameCSS from "./game.module.css";
-import Dog from "./dog/dog";
+import Dog from "../dog/dog";
 import { useState, useEffect } from "react";
 import Names from "../../assets/dognames.json";
 
-export default function Game() {
+// this is just to make it possible to create stories using Storybook
+interface info {
+  story?: boolean;
+  storyMatchup?: DogType[];
+  storyFave?: DogType;
+}
+
+export default function Game(props: info) {
   const [dogs, setDogs] = useState<DogType[]>([]);
   const [fave, setFave] = useState<DogType>({ image: "", name: "" });
   const [count, setCount] = useState<number>(1);
@@ -13,23 +20,34 @@ export default function Game() {
   // get an array of urls for dog pictures from the API
   // associate each url with a name to fill the dogs array
   useEffect(() => {
-    fetch("https://dog.ceo/api/breeds/image/random/10")
-      .then((response) => response.json())
-      .then((data) => {
-        let dogsToCopy: DogType[] = [];
-        const dogPics = data.message;
-        dogPics.forEach((pic: string) => {
-          const randomIndex = Math.floor(Math.random() * Names.length);
-          const dog: DogType = {
-            image: pic,
-            name: Names[randomIndex],
-          };
-          dogsToCopy.push(dog);
+    if (props.story === undefined) {
+      fetch("https://dog.ceo/api/breeds/image/random/10")
+        .then((response) => response.json())
+        .then((data) => {
+            let dogsToCopy: DogType[] = [];
+            const dogPics = data.message;
+            dogPics.forEach((pic: string) => {
+              const randomIndex = Math.floor(Math.random() * Names.length);
+              const dog: DogType = {
+                image: pic,
+                name: Names[randomIndex],
+              };
+              dogsToCopy.push(dog);
+            });
+            setDogs(dogsToCopy);
+            setMatchup(dogsToCopy.slice(0, 2));
+            setLoading(false);
         });
-        setDogs(dogsToCopy);
-        setMatchup(dogsToCopy.slice(0, 2));
-        setLoading(false);
-      });
+    }
+    else {
+      if (props.storyMatchup != undefined) {
+        setMatchup(props.storyMatchup);
+      }
+      if (props.storyFave != undefined) {
+        setFave(props.storyFave);
+        setCount(10);
+      }
+    }
   }, []);
 
   // this is executed when the user has selected a dog
@@ -46,7 +64,7 @@ export default function Game() {
 
   // return matchups until all dogs have been seen
   // once all dogs have been seen just return the fave
-  if (loading) {
+  if (loading && props.storyFave === undefined && props.storyMatchup === undefined) {
     return (
       <div className={GameCSS.dogs}>
         <h1>Loading...</h1>

@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Dog from "../components/game/dog/dog";
+import Dog from "../components/dog/dog";
 
 const meta: Meta<typeof Dog> = {
-    component: Dog,
-    title: 'Dog'
+    component: Dog
 }
 
 export default meta;
@@ -12,7 +11,7 @@ type Story = StoryObj<typeof meta>;
 
 const defaultDog: DogType = {
     image: 'https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*',
-    name: 'Ralph',
+    name: 'Ralph'
 };
 
 export const squareImage: Story = {
@@ -28,7 +27,7 @@ const wideDog: DogType = {
 
 export const wideImage: Story = {
     args: {
-        dog: wideDog,
+        dog: wideDog
     }
 };
 
@@ -39,7 +38,7 @@ const tallDog: DogType = {
 
 export const tallImage: Story = {
     args: {
-        dog: tallDog,
+        dog: tallDog
     }
 };
 

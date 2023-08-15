@@ -2,7 +2,7 @@ import DogCSS from "./dog.module.css";
 
 interface info {
   dog: DogType;
-  onPress: () => void;
+  onPress?: () => void;
 }
 
 export default function Dog(props: info) {
