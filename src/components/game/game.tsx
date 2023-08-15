@@ -42,10 +42,12 @@ export default function Game(props: info) {
     else {
       if (props.storyMatchup != undefined) {
         setMatchup(props.storyMatchup);
+        setLoading(false);
       }
       if (props.storyFave != undefined) {
         setFave(props.storyFave);
         setCount(10);
+        setLoading(false);
       }
     }
   }, []);
@@ -64,7 +66,7 @@ export default function Game(props: info) {
 
   // return matchups until all dogs have been seen
   // once all dogs have been seen just return the fave
-  if (loading && props.storyFave === undefined && props.storyMatchup === undefined) {
+  if (loading) {
     return (
       <div className={GameCSS.dogs}>
         <h1>Loading...</h1>
