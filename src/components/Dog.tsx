@@ -10,7 +10,7 @@ export default function Dog(props: info) {
     <figure id='dog' className='flex flex-col w-fit h-fit m-2'>
       <img
         id='picture'
-        className='h-[400px] w-[400px] object-contain border-solid border-sky-500 border-2'
+        className='h-[400px] w-[400px] object-contain border-solid border-black border'
         src={props.dog.image}
         onClick={props.onPress}
         onError={({ currentTarget }) => {
