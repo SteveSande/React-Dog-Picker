@@ -113,7 +113,7 @@ export default function Game(props: info) {
   } else if (matchup && count >= dogs.length) {
     return (
       <div id='game' className='flex flex-col flex-wrap justify-center  items-center'>
-          <Dog dog={fave} onPress={() => onDogPick(fave)} fave={true} />
+          <Dog dog={fave} onPress={() => onDogPick(fave)} fave={true} dreamDog={faveFaceoff} />
           <div id='controls'>
           <button 
             className='mt-8 mr-2 bg-green-700 p-3 text-xl font-bold text-white rounded-lg' 

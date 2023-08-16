@@ -1,14 +1,19 @@
 interface info {
   dog: DogType;
   onPress?: () => void;
-  fave: boolean;
+  fave?: boolean;
+  dreamDog?: boolean;
 }
 
 export default function Dog(props: info) {
   let name = '';
   let cursor = 'cursor-pointer'
-  if (props.fave) {
+  if (props.fave && !props.dreamDog) {
     name = '💗' + props.dog.name + '💗';
+    cursor = ''
+  }
+  else if (props.dreamDog) {
+    name = '💗💗💗' + props.dog.name + '💗💗💗';
     cursor = ''
   }
   else {
