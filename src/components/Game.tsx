@@ -15,6 +15,7 @@ export default function Game(props: info) {
   const [count, setCount] = useState<number>(1);
   const [matchup, setMatchup] = useState<DogType[]>();
   const [loading, setLoading] = useState<boolean>(true);
+  const [restart, setRestart] = useState<boolean>(false);
 
   // get an array of urls for dog pictures from the API
   // associate each url with a name to fill the dogs array
@@ -52,7 +53,7 @@ export default function Game(props: info) {
         setLoading(false);
       }
     }
-  }, []);
+  }, [restart]);
 
   // this is executed when the user has selected a dog
   // pick is the dog they clicked on
@@ -66,11 +67,18 @@ export default function Game(props: info) {
     fave.image != "" && setMatchup([fave, dogs[count]]);
   }, [fave, count]);
 
+  const executeRestart = () => {
+    setLoading(true);
+    setFave({ image: '', name: '', color: '' });
+    setCount(1);
+    setRestart(prevRestart => !prevRestart);
+  }
+
   // return matchups until all dogs have been seen
   // once all dogs have been seen just return the fave
   if (loading) {
     return (
-      <div id='game' className='flex justify-center items-center h-[300px]'>
+      <div id='game' className='flex justify-center items-center h-[300px] cursor-wait'>
         <h1 className='text-center text-xl'>Loading...</h1>
       </div>
     );
@@ -84,8 +92,14 @@ export default function Game(props: info) {
     );
   } else if (matchup && count >= 10) {
     return (
-      <div id='game' className='flex flex-wrap justify-center'>
+      <div id='game' className='flex flex-col flex-wrap justify-center  items-center'>
         <Dog dog={fave} onPress={() => onDogPick(fave)} fave={true} />
+        <button 
+          className='m-8 bg-green-700 p-3 text-xl font-bold text-white rounded-lg' 
+          onClick={executeRestart}
+        >
+          Restart
+        </button>
       </div>
     );
   } else {

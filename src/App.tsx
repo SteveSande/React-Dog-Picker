@@ -4,7 +4,7 @@ import Header from "./components/Header";
 
 export default function App() {
   return (
-    <div id='container' className='flex flex-col'>
+    <div id='container' className='flex flex-col select-none'>
       <Header />
       <Game />
     </div>

@@ -11,7 +11,8 @@ type Story = StoryObj<typeof meta>;
 
 const sampleDog: DogType = {
     image: 'https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*',
-    name: 'Ralph'
+    name: 'Ralph',
+    color: 'bg-pink-300'
 };
 
 export const matchup: Story = {
