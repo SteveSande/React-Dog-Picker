@@ -11,7 +11,7 @@ interface info {
 
 export default function Game(props: info) {
   const [dogs, setDogs] = useState<DogType[]>([]);
-  const [fave, setFave] = useState<DogType>({ image: "", name: "" });
+  const [fave, setFave] = useState<DogType>({ image: '', name: '', color: '' });
   const [count, setCount] = useState<number>(1);
   const [matchup, setMatchup] = useState<DogType[]>();
   const [loading, setLoading] = useState<boolean>(true);
@@ -25,11 +25,14 @@ export default function Game(props: info) {
         .then((data) => {
             let dogsToCopy: DogType[] = [];
             const dogPics = data.message;
+            const colors: string[] = ['bg-stone-300','bg-red-300','bg-orange-300','bg-amber-300','bg-yellow-300','bg-lime-300','bg-green-300','bg-emerald-300','bg-teal-300','bg-cyan-300','bg-sky-300','bg-blue-300','bg-indigo-300','bg-violet-300','bg-purple-300','bg-fuchsia-300','bg-pink-300','bg-rose-300'];
             dogPics.forEach((pic: string) => {
-              const randomIndex = Math.floor(Math.random() * Names.length);
+              const nameIndex = Math.floor(Math.random() * Names.length);
+              const colorIndex = Math.floor(Math.random() * colors.length);
               const dog: DogType = {
                 image: pic,
-                name: Names[randomIndex],
+                name: Names[nameIndex],
+                color: colors[colorIndex]
               };
               dogsToCopy.push(dog);
             });
