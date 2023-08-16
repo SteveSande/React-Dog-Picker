@@ -1,7 +1,6 @@
-import GameCSS from "./game.module.css";
-import Dog from "../dog/dog";
+import Dog from "./Dog";
 import { useState, useEffect } from "react";
-import Names from "../../assets/dognames.json";
+import Names from "../assets/dognames.json";
 
 // this is just to make it possible to create stories using Storybook
 interface info {
@@ -68,13 +67,13 @@ export default function Game(props: info) {
   // once all dogs have been seen just return the fave
   if (loading) {
     return (
-      <div className={GameCSS.dogs}>
+      <div id='game' className='flex flex-wrap justify-center'>
         <h1>Loading...</h1>
       </div>
     );
   } else if (matchup && count < 10) {
     return (
-      <div className={GameCSS.dogs}>
+      <div id='game' className='flex flex-wrap justify-center'>
         {matchup.map((dog, index) => (
           <Dog key={index} dog={dog} onPress={() => onDogPick(dog)} />
         ))}
@@ -82,7 +81,7 @@ export default function Game(props: info) {
     );
   } else if (matchup && count >= 10) {
     return (
-      <div className={GameCSS.dogs}>
+      <div id='game' className='flex flex-wrap justify-center'>
         <Dog dog={fave} onPress={() => onDogPick(fave)} />
       </div>
     );

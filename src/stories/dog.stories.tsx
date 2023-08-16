@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Dog from "../components/dog/dog";
+import Dog from "../components/Dog";
 
 const meta: Meta<typeof Dog> = {
     component: Dog

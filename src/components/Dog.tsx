@@ -1,4 +1,4 @@
-import DogCSS from "./dog.module.css";
+
 
 interface info {
   dog: DogType;
@@ -7,9 +7,10 @@ interface info {
 
 export default function Dog(props: info) {
   return (
-    <div className={DogCSS.dog}>
+    <figure id='dog' className='flex flex-col w-fit h-fit m-2'>
       <img
-        className={DogCSS.image}
+        id='picture'
+        className='h-[400px] w-[400px] object-contain border-solid border-sky-500 border-2'
         src={props.dog.image}
         onClick={props.onPress}
         onError={({ currentTarget }) => {
@@ -17,7 +18,7 @@ export default function Dog(props: info) {
           currentTarget.alt = "Image Not Found - Bad URL";
         }}
       ></img>
-      {props.dog.name}
-    </div>
+      <figcaption id='name' className='text-center p-3 text-xl'>{props.dog.name}</figcaption>
+    </figure>
   );
 }

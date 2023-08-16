@@ -1,12 +1,10 @@
 import "./App.css";
-import Game from "./components/game/game";
-import Header from "./components/header/header";
+import Game from "./components/Game";
+import Header from "./components/Header";
 
 export default function App() {
   return (
-    <div
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
+    <div id='container' className='flex flex-col'>
       <Header />
       <Game />
     </div>
