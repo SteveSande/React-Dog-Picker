@@ -15,12 +15,14 @@ export default function Game(props: info) {
   const [count, setCount] = useState<number>(1);
   const [matchup, setMatchup] = useState<DogType[]>();
   const [loading, setLoading] = useState<boolean>(true);
-  const [restart, setRestart] = useState<boolean>(false);
+  const [rounds, setRounds] = useState<number>(1);
+  const [faves, setFaves] = useState<DogType[]>([])
+  const [faveFaceoff, setFaveFaceoff] = useState<boolean>(false);
 
   // get an array of urls for dog pictures from the API
   // associate each url with a name to fill the dogs array
   useEffect(() => {
-    if (props.story === undefined) {
+    if (props.story === undefined && !faveFaceoff) {
       fetch("https://dog.ceo/api/breeds/image/random/10")
         .then((response) => response.json())
         .then((data) => {
@@ -42,7 +44,7 @@ export default function Game(props: info) {
             setLoading(false);
         });
     }
-    else {
+    else if (props.story != undefined) {
       if (props.storyMatchup != undefined) {
         setMatchup(props.storyMatchup);
         setLoading(false);
@@ -53,7 +55,7 @@ export default function Game(props: info) {
         setLoading(false);
       }
     }
-  }, [restart]);
+  }, [rounds]);
 
   // this is executed when the user has selected a dog
   // pick is the dog they clicked on
@@ -64,14 +66,32 @@ export default function Game(props: info) {
 
   // ensure matchup is updated after fave is updated
   useEffect(() => {
-    fave.image != "" && setMatchup([fave, dogs[count]]);
+    if (fave.image != "") setMatchup([fave, dogs[count]]);
+    if (count === dogs.length && !faveFaceoff) {
+      const updatedFaves = [...faves];
+      updatedFaves.push(fave);
+      setFaves(updatedFaves);
+    }
   }, [fave, count]);
 
-  const executeRestart = () => {
+  const newRound = () => {
+    setFaveFaceoff(false);
     setLoading(true);
     setFave({ image: '', name: '', color: '' });
     setCount(1);
-    setRestart(prevRestart => !prevRestart);
+    setRounds(prevRounds => prevRounds += 1);
+  }
+
+  const executeFaveFaceoff = () => {
+    setFaveFaceoff(true);
+    setLoading(true);
+    setDogs(faves);
+    setMatchup(faves.slice(0, 2));
+    setCount(1);
+    setFave({ image: '', name: '', color: '' });
+    setRounds(0);
+    setFaves([]);
+    setLoading(false);
   }
 
   // return matchups until all dogs have been seen
@@ -82,7 +102,7 @@ export default function Game(props: info) {
         <h1 className='text-center text-xl'>Loading...</h1>
       </div>
     );
-  } else if (matchup && count < 10) {
+  } else if (matchup && count < dogs.length) {
     return (
       <div id='game' className='flex flex-wrap justify-center'>
         {matchup.map((dog, index) => (
@@ -90,16 +110,25 @@ export default function Game(props: info) {
         ))}
       </div>
     );
-  } else if (matchup && count >= 10) {
+  } else if (matchup && count >= dogs.length) {
     return (
       <div id='game' className='flex flex-col flex-wrap justify-center  items-center'>
-        <Dog dog={fave} onPress={() => onDogPick(fave)} fave={true} />
-        <button 
-          className='m-8 bg-green-700 p-3 text-xl font-bold text-white rounded-lg' 
-          onClick={executeRestart}
-        >
-          Restart
-        </button>
+          <Dog dog={fave} onPress={() => onDogPick(fave)} fave={true} />
+          <div id='controls'>
+          <button 
+            className='mt-8 mr-2 bg-green-700 p-3 text-xl font-bold text-white rounded-lg' 
+            onClick={newRound}
+          >
+            New Round
+          </button>
+          <button 
+            className='ml-2 bg-red-700 p-3 text-xl font-bold text-white rounded-lg disabled:opacity-25' 
+            onClick={executeFaveFaceoff}
+            disabled={rounds < 2}
+          >
+            Fave Faceoff
+          </button>
+        </div>
       </div>
     );
   } else {

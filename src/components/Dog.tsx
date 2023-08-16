@@ -1,5 +1,3 @@
-
-
 interface info {
   dog: DogType;
   onPress?: () => void;
