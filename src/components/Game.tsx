@@ -78,14 +78,14 @@ export default function Game(props: info) {
     return (
       <div id='game' className='flex flex-wrap justify-center'>
         {matchup.map((dog, index) => (
-          <Dog key={index} dog={dog} onPress={() => onDogPick(dog)} />
+          <Dog key={index} dog={dog} onPress={() => onDogPick(dog)} fave={false} />
         ))}
       </div>
     );
   } else if (matchup && count >= 10) {
     return (
       <div id='game' className='flex flex-wrap justify-center'>
-        <Dog dog={fave} onPress={() => onDogPick(fave)} />
+        <Dog dog={fave} onPress={() => onDogPick(fave)} fave={true} />
       </div>
     );
   } else {
