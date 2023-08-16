@@ -70,8 +70,8 @@ export default function Game(props: info) {
   // once all dogs have been seen just return the fave
   if (loading) {
     return (
-      <div id='game' className='flex flex-wrap justify-center'>
-        <h1>Loading...</h1>
+      <div id='game' className='flex justify-center items-center h-[300px]'>
+        <h1 className='text-center text-xl'>Loading...</h1>
       </div>
     );
   } else if (matchup && count < 10) {
