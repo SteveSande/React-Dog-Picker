@@ -22,7 +22,7 @@ export default function Dog(props: info) {
 
 
   return (
-    <figure id='dog' className={`flex flex-col w-fit h-fit m-2 border-solid border-black border ${cursor}`}>
+    <figure id='dog' className={`flex flex-col w-fit h-fit m-2 border-solid border-black border ${props.dog.color} ${cursor}`}>
       <img
         id='picture'
         className='h-[300px] object-contain'
@@ -34,7 +34,7 @@ export default function Dog(props: info) {
           console.log(currentTarget);
         }}
       ></img>
-      <figcaption id='name' className={`text-center p-3 text-xl ${props.dog.color}`}>{name}</figcaption>
+      <figcaption id='name' className='text-center p-3 text-xl'>{name}</figcaption>
     </figure>
   );
 }
