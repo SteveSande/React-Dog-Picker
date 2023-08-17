@@ -119,10 +119,10 @@ export default function Game(props: info) {
     return (
       <div id='game' className='flex flex-col flex-wrap justify-center  items-center'>
         <Dog dog={fave} fave={true} dreamDog={faveFaceoff} />
-        <div id='controls' className='flex flex-wrap justify-center'>
+        <div id='controls' className='mt-8 flex flex-wrap justify-center'>
           <button 
             id='newRound'
-            className='mt-8 m-2 bg-green-700 p-3 text-xl font-bold text-white rounded-lg' 
+            className='m-2 bg-green-700 p-3 text-xl font-bold text-white rounded-lg' 
             onClick={newRound}
           >
             New Round
