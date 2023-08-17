@@ -47,6 +47,7 @@ export default function Game(props: info) {
     }
     else if (props.story != undefined) {
       if (props.storyMatchup != undefined) {
+        setDogs([{ image: '', name: '', color: '' }, { image: '', name: '', color: '' }]);
         setMatchup(props.storyMatchup);
         setLoading(false);
       }
@@ -118,7 +119,7 @@ export default function Game(props: info) {
   } else if (matchup && count >= dogs.length) {
     return (
       <div id='game' className='flex flex-col flex-wrap justify-center  items-center'>
-        <Dog dog={fave} fave={true} dreamDog={faveFaceoff} />
+        <Dog dog={fave} fave={true} dream={faveFaceoff} />
         <div id='controls' className='m-8 flex flex-wrap justify-center'>
           <button 
             id='newRound'

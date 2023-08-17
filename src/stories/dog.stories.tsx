@@ -2,7 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import Dog from "../components/Dog";
 
 const meta: Meta<typeof Dog> = {
-    component: Dog
+    component: Dog,
+    tags: ['autodocs']
 }
 
 export default meta;

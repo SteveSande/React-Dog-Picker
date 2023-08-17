@@ -1,18 +1,23 @@
 interface info {
+  /** This is the dog object to display. A dog object includes a name, picture, and color. */
   dog: DogType;
+  /** This is the function to execute when a user clicks on the dog component. */
   onPress?: () => void;
+  /** This is true if the dog was the most liked dog from a regular round of play. */
   fave?: boolean;
-  dreamDog?: boolean;
+  /** This is true if the dog was the most liked dog from a "Fave Faceoff" round. */
+  dream?: boolean;
 }
 
+/** The dog component creates an optionally interactive visual representation of a dog object. */
 export default function Dog(props: info) {
   let name = '';
   let cursor = 'cursor-pointer'
-  if (props.fave && !props.dreamDog) {
+  if (props.fave && !props.dream) {
     name = '💗' + props.dog.name + '💗';
     cursor = ''
   }
-  else if (props.dreamDog) {
+  else if (props.dream) {
     name = '🌈☁️' + props.dog.name + '☁️✨';
     cursor = ''
   }
