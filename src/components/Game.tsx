@@ -4,6 +4,7 @@ import Names from "../assets/dognames.json";
 
 // this is just to make it possible to create stories using Storybook
 interface info {
+  setBackground: Function;
   story?: boolean;
   storyMatchup?: DogType[];
   storyFave?: DogType;
@@ -72,9 +73,13 @@ export default function Game(props: info) {
       updatedFaves.push(fave);
       setFaves(updatedFaves);
     }
+    else if (count === dogs.length && faveFaceoff) {
+      props.setBackground('bg-[url("/src/assets/hearts.png")]');
+    }
   }, [fave, count]);
 
   const newRound = () => {
+    props.setBackground('');
     setFaveFaceoff(false);
     setLoading(true);
     setFave({ image: '', name: '', color: '' });
@@ -113,16 +118,18 @@ export default function Game(props: info) {
   } else if (matchup && count >= dogs.length) {
     return (
       <div id='game' className='flex flex-col flex-wrap justify-center  items-center'>
-          <Dog dog={fave} onPress={() => onDogPick(fave)} fave={true} dreamDog={faveFaceoff} />
-          <div id='controls'>
+        <Dog dog={fave} fave={true} dreamDog={faveFaceoff} />
+        <div id='controls' className='flex flex-wrap justify-center'>
           <button 
-            className='mt-8 mr-2 bg-green-700 p-3 text-xl font-bold text-white rounded-lg' 
+            id='newRound'
+            className='mt-8 m-2 bg-green-700 p-3 text-xl font-bold text-white rounded-lg' 
             onClick={newRound}
           >
             New Round
           </button>
           <button 
-            className='ml-2 bg-red-700 p-3 text-xl font-bold text-white rounded-lg disabled:opacity-25' 
+            id='faveFaceoff'
+            className='m-2 bg-red-700 p-3 text-xl font-bold text-white rounded-lg disabled:opacity-25' 
             onClick={executeFaveFaceoff}
             disabled={rounds < 2}
           >

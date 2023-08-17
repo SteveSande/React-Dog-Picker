@@ -13,7 +13,7 @@ export default function Dog(props: info) {
     cursor = ''
   }
   else if (props.dreamDog) {
-    name = '💗💗💗' + props.dog.name + '💗💗💗';
+    name = '🌈☁️' + props.dog.name + '☁️✨';
     cursor = ''
   }
   else {
