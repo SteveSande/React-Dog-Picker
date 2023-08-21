@@ -9,8 +9,9 @@ interface info {
   dream?: boolean;
 }
 
-/** The dog component creates an optionally interactive visual representation of a dog object. */
+/** The dog component creates an optionally-interactive visual representation of a dog object. */
 export default function Dog(props: info) {
+  // edit the name and cursor (no interaction) if it's a fave or dream dog
   let name = '';
   let cursor = 'cursor-pointer'
   if (props.fave && !props.dream) {
@@ -24,7 +25,6 @@ export default function Dog(props: info) {
   else {
     name = props.dog.name
   }
-
 
   return (
     <figure id='dog' className={`flex flex-col w-fit h-fit m-2 border-solid border-black border ${props.dog.color} ${cursor}`}>
