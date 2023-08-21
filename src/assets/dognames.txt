@@ -1,0 +1,4 @@
+NOTE FOR JSON FILE
+starting at Max, male import from https://github.com/sindresorhus/dog-names
+starting at Bella, female import https://github.com/sindresorhus/dog-names
+starting at Filber, originals
