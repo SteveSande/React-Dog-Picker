@@ -93,13 +93,13 @@ export default function Game(props: info) {
   const onDogPick = (pick: DogType) => {
     setMatchup([
       {
-        image: "favicon.png",
-        name: "Generating Matchup",
+        image: "",
+        name: "Generating matchup...",
         color: "bg-stone-300",
       },
       {
-        image: "favicon.png",
-        name: "Generating Matchup",
+        image: "",
+        name: "Generating matchup...",
         color: "bg-stone-300",
       },
     ]);
