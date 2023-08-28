@@ -9,37 +9,40 @@ interface info {
   dream?: boolean;
 }
 
-/** The dog component creates an optionally-interactive visual representation of a dog object. */
+/** The Dog component creates an optionally-interactive visual representation of a dog object. */
 export default function Dog(props: info) {
   // edit the name and cursor (no interaction) if it's a fave or dream dog
-  let name = '';
-  let cursor = 'cursor-pointer'
+  let name = "";
+  let cursor = "cursor-pointer";
   if (props.fave && !props.dream) {
-    name = '💗' + props.dog.name + '💗';
-    cursor = ''
-  }
-  else if (props.dream) {
-    name = '🌈☁️' + props.dog.name + '☁️✨';
-    cursor = ''
-  }
-  else {
-    name = props.dog.name
+    name = "💗" + props.dog.name + "💗";
+    cursor = "";
+  } else if (props.dream) {
+    name = "🌈☁️" + props.dog.name + "☁️✨";
+    cursor = "";
+  } else {
+    name = props.dog.name;
   }
 
   return (
-    <figure id='dog' className={`flex flex-col w-fit h-fit m-2 border-solid border-black border ${props.dog.color} ${cursor}`}>
+    <figure
+      id="dog"
+      className={`flex flex-col w-fit h-fit m-2 border-solid border-black border ${props.dog.color} ${cursor}`}
+      onClick={props.onPress}
+    >
       <img
-        id='picture'
-        className='h-[300px] object-contain'
+        id="picture"
+        className="h-[300px] object-contain"
         src={props.dog.image}
-        onClick={props.onPress}
         onError={({ currentTarget }) => {
           currentTarget.onerror = null; // prevents looping
           currentTarget.alt = "Image Not Found";
           console.log(currentTarget);
         }}
       ></img>
-      <figcaption id='name' className='text-center p-3 text-xl'>{name}</figcaption>
+      <figcaption id="name" className="text-center p-3 text-xl">
+        {name}
+      </figcaption>
     </figure>
   );
 }

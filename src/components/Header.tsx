@@ -1,3 +1,4 @@
+/** The Header component introduces the game to the user and provides instructions for playing. */
 export default function Header() {
   return (
     <div id="header" className="mb-8 mt-8 cursor-default">
