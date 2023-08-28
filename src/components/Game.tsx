@@ -1,6 +1,7 @@
 import Dog from "./Dog";
 import { useState, useEffect } from "react";
 import Names from "../assets/dognames.json";
+import { Button } from "ariakit";
 
 interface info {
   /** This is a setState function that is passed in from the App component. It sets the background of the page. */
@@ -160,21 +161,21 @@ export default function Game(props: info) {
       >
         <Dog dog={fave} fave={true} dream={faveFaceoff} />
         <div id="controls" className="m-8 flex flex-wrap justify-center">
-          <button
+          <Button
             id="newRound"
             className="m-2 bg-green-700 p-3 text-xl font-bold text-white rounded-lg"
             onClick={newRound}
           >
             New Round
-          </button>
-          <button
+          </Button>
+          <Button
             id="faveFaceoff"
             className="m-2 bg-red-700 p-3 text-xl font-bold text-white rounded-lg disabled:opacity-25"
             onClick={executeFaveFaceoff}
             disabled={rounds < 2}
           >
             Fave Faceoff
-          </button>
+          </Button>
         </div>
       </div>
     );

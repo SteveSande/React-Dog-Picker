@@ -1,3 +1,5 @@
+import { Button } from "ariakit";
+
 interface info {
   /** This is the dog object to display. A dog object includes a name, picture, and color. */
   dog: DogType;
@@ -14,35 +16,41 @@ export default function Dog(props: info) {
   // edit the name and cursor (no interaction) if it's a fave or dream dog
   let name = "";
   let cursor = "cursor-pointer";
+  let disabled = false;
   if (props.fave && !props.dream) {
     name = "💗" + props.dog.name + "💗";
     cursor = "";
+    disabled = true;
   } else if (props.dream) {
     name = "🌈☁️" + props.dog.name + "☁️✨";
     cursor = "";
+    disabled = true;
   } else {
     name = props.dog.name;
   }
 
   return (
-    <figure
+    <Button
       id="dog"
       className={`flex flex-col w-fit h-fit m-2 border-solid border-black border ${props.dog.color} ${cursor}`}
       onClick={props.onPress}
+      disabled={disabled}
     >
-      <img
-        id="picture"
-        className="h-[300px] object-contain"
-        src={props.dog.image}
-        onError={({ currentTarget }) => {
-          currentTarget.onerror = null; // prevents looping
-          currentTarget.alt = "Image Not Found";
-          console.log(currentTarget);
-        }}
-      ></img>
-      <figcaption id="name" className="text-center p-3 text-xl">
-        {name}
-      </figcaption>
-    </figure>
+      <figure>
+        <img
+          id="picture"
+          className="h-[300px] object-contain"
+          src={props.dog.image}
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null; // prevents looping
+            currentTarget.alt = "Image Not Found";
+            console.log(currentTarget);
+          }}
+        ></img>
+        <figcaption id="name" className="text-center p-3 text-xl">
+          {name}
+        </figcaption>
+      </figure>
+    </Button>
   );
 }
