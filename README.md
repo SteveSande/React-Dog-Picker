@@ -10,3 +10,4 @@ Technologies Used:
 - Tailwind CSS
 - Ariakit
 - Storybook
+- React Lazy Load Image Component
