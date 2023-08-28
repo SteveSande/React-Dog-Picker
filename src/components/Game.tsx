@@ -92,16 +92,8 @@ export default function Game(props: info) {
   // pick is the dog they clicked on
   const onDogPick = (pick: DogType) => {
     setMatchup([
-      {
-        image: "",
-        name: "Generating matchup...",
-        color: "bg-stone-300",
-      },
-      {
-        image: "",
-        name: "Generating matchup...",
-        color: "bg-stone-300",
-      },
+      { image: "", name: "", color: "" },
+      { image: "", name: "", color: "" },
     ]);
     setFave(pick);
     setCount((prevCount) => prevCount + 1);

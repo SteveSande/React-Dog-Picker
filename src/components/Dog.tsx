@@ -1,4 +1,6 @@
 import { Button } from "ariakit";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 interface info {
   /** This is the dog object to display. A dog object includes a name, picture, and color. */
@@ -37,12 +39,15 @@ export default function Dog(props: info) {
       disabled={disabled}
     >
       <figure>
-        <img
+        <LazyLoadImage
+          key={props.dog.name}
           id="picture"
           className="h-[300px] w-[400px] object-contain"
           alt="randomly selected picture of a dog"
           src={props.dog.image}
-        ></img>
+          placeholderSrc="favicon.png"
+          effect="blur"
+        ></LazyLoadImage>
         <figcaption id="name" className="text-center p-3 text-xl">
           {name}
         </figcaption>
