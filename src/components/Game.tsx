@@ -162,14 +162,14 @@ export default function Game(props: info) {
         <Dog dog={fave} fave={true} dream={faveFaceoff} />
         <div id="controls" className="m-8 flex flex-wrap justify-center">
           <Button
-            id="newRound"
+            id="new-round"
             className="m-2 bg-green-700 p-3 text-xl font-bold text-white rounded-lg"
             onClick={newRound}
           >
             New Round
           </Button>
           <Button
-            id="faveFaceoff"
+            id="fave-faceoff"
             className="m-2 bg-red-700 p-3 text-xl font-bold text-white rounded-lg disabled:opacity-25"
             onClick={executeFaveFaceoff}
             disabled={rounds < 2}

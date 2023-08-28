@@ -10,7 +10,7 @@ export default function App() {
 
   return (
     <div
-      id="container"
+      id="page"
       className={`flex flex-col select-none h-screen ${background}`}
     >
       <Header />
