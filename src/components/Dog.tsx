@@ -31,7 +31,7 @@ export default function Dog(props: info) {
 
   return (
     <Button
-      id="dog"
+      id={props.dog.name}
       className={`flex flex-col w-fit h-fit m-2 border-solid border-black border ${props.dog.color} ${cursor}`}
       onClick={props.onPress}
       disabled={disabled}
