@@ -39,7 +39,6 @@ export default function Game(props: info) {
           let dogsToCopy: DogType[] = [];
           const dogPics = data.message;
           const colors: string[] = [
-            "bg-stone-300",
             "bg-red-300",
             "bg-orange-300",
             "bg-amber-300",
@@ -92,6 +91,18 @@ export default function Game(props: info) {
   // this is executed when the user has selected a dog
   // pick is the dog they clicked on
   const onDogPick = (pick: DogType) => {
+    setMatchup([
+      {
+        image: "favicon.png",
+        name: "Generating Matchup",
+        color: "bg-stone-300",
+      },
+      {
+        image: "favicon.png",
+        name: "Generating Matchup",
+        color: "bg-stone-300",
+      },
+    ]);
     setFave(pick);
     setCount((prevCount) => prevCount + 1);
   };
