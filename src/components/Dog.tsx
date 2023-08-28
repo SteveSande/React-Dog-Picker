@@ -39,8 +39,8 @@ export default function Dog(props: info) {
       <figure>
         <img
           id="picture"
-          className="h-[300px] object-contain"
-          alt="randomly selected picture of dog"
+          className="h-[300px] w-[400px] object-contain"
+          alt="randomly selected picture of a dog"
           src={props.dog.image}
         ></img>
         <figcaption id="name" className="text-center p-3 text-xl">
