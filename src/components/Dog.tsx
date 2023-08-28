@@ -40,12 +40,8 @@ export default function Dog(props: info) {
         <img
           id="picture"
           className="h-[300px] object-contain"
+          alt="randomly selected picture of dog"
           src={props.dog.image}
-          onError={({ currentTarget }) => {
-            currentTarget.onerror = null; // prevents looping
-            currentTarget.alt = "Image Not Found";
-            console.log(currentTarget);
-          }}
         ></img>
         <figcaption id="name" className="text-center p-3 text-xl">
           {name}
