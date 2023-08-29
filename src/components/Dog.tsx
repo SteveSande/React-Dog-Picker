@@ -1,5 +1,4 @@
 import { Button } from "ariakit";
-import { useEffect, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
@@ -41,16 +40,16 @@ export default function Dog(props: info) {
     >
       <figure>
         <LazyLoadImage
-          key={props.dog.name}
+          key={props.dog.name} // setting the key ensures the placeholder loads in between matchups, seems to be a idiosyncracy of the library
           id="picture"
           className="h-[300px] w-[400px] object-contain"
-          alt="randomly selected picture of a dog"
+          alt="a randomly selected picture of a dog"
           src={props.dog.image}
           placeholderSrc="favicon.png"
           effect="blur"
           onError={() => {
             window.alert(
-              "The image for " + props.dog.name + " is no longer available :("
+              props.dog.name + "'s picture is no longer available :("
             );
           }}
         ></LazyLoadImage>

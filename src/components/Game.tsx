@@ -30,7 +30,10 @@ export default function Game(props: info) {
   const [faveFaceoff, setFaveFaceoff] = useState<boolean>(false);
 
   // get an array of urls for dog pictures from the API
-  // associate each url with a name to fill the dogs array
+  // associate each url with a random name and color
+  // create an array of dogs with the data and copy it into the dogs and matchup states
+  // the game starts after the states are set
+  // the API call is not necessary when it's a fave faceoff round or when Storybook is being used
   useEffect(() => {
     if (props.story === undefined && !faveFaceoff) {
       fetch("https://dog.ceo/api/breeds/image/random/10")
@@ -71,6 +74,8 @@ export default function Game(props: info) {
           setMatchup(dogsToCopy.slice(0, 2));
           setLoading(false);
         });
+      // this code is specific to Storybook
+      // it skips the API call and sets up data manually
     } else if (props.story != undefined) {
       if (props.storyMatchup != undefined) {
         setDogs([
@@ -88,8 +93,9 @@ export default function Game(props: info) {
     }
   }, [rounds]);
 
-  // this is executed when the user has selected a dog
-  // pick is the dog they clicked on
+  // this function is executed when the user has selected a dog from a matchup
+  // when a selection has been made the game needs to be advanced
+  // pick is the dog that they clicked on
   const onDogPick = (pick: DogType) => {
     setMatchup([
       { image: "", name: "", color: "" },
@@ -99,7 +105,9 @@ export default function Game(props: info) {
     setCount((prevCount) => prevCount + 1);
   };
 
-  // ensure matchup is updated after fave is updated
+  // ensure matchup is updated whenever fave or count are updated
+  // when a standard round ends the overall fave needs to be stored
+  // when a fave faceoff ends the background is set to make it more special
   useEffect(() => {
     if (fave.image != "") setMatchup([fave, dogs[count]]);
     if (count === dogs.length && !faveFaceoff) {
@@ -111,6 +119,9 @@ export default function Game(props: info) {
     }
   }, [fave, count]);
 
+  // the user has started a new round
+  // several states need to be set to properly launch it
+  // an API call will be triggered to get fresh data
   const newRound = () => {
     props.setBackground("");
     setFaveFaceoff(false);
@@ -120,6 +131,9 @@ export default function Game(props: info) {
     setRounds((prevRounds) => (prevRounds += 1));
   };
 
+  // the user has started a fave faceoff
+  // several states need to be set to properly launch it
+  // it's not necessary to do an API call because the faves have been saved locally
   const executeFaveFaceoff = () => {
     setFaveFaceoff(true);
     setLoading(true);
@@ -132,8 +146,10 @@ export default function Game(props: info) {
     setLoading(false);
   };
 
-  // return matchups until all dogs have been seen
-  // once all dogs have been seen just return the fave
+  // First Condition: a loading screen is returned if a response from the API is needed to proceed
+  // Second Condition: most of the time a matchup is returned with 2 dogs for the user to choose from
+  // Third Condition: if all the dogs have been seen then the user only sees their fave or dream dog, there are also controls to start a new round or fave faceoff
+  // Fourth Conditon: should be unreachable, if I made the third condition else React would complain about possible null matchup I think
   if (loading) {
     return (
       <div
@@ -156,7 +172,7 @@ export default function Game(props: info) {
         ))}
       </div>
     );
-  } else if (matchup && count >= dogs.length) {
+  } else {
     return (
       <div
         id="game"
@@ -182,7 +198,5 @@ export default function Game(props: info) {
         </div>
       </div>
     );
-  } else {
-    return null;
   }
 }
