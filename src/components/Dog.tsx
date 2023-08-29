@@ -1,4 +1,5 @@
 import { Button } from "ariakit";
+import { useEffect, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
@@ -47,6 +48,11 @@ export default function Dog(props: info) {
           src={props.dog.image}
           placeholderSrc="favicon.png"
           effect="blur"
+          onError={() => {
+            window.alert(
+              "The image for " + props.dog.name + " is no longer available :("
+            );
+          }}
         ></LazyLoadImage>
         <figcaption id="name" className="text-center p-3 text-xl">
           {name}
