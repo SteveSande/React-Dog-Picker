@@ -28,6 +28,7 @@ export default function Game(props: info) {
   const [rounds, setRounds] = useState<number>(1);
   const [faves, setFaves] = useState<DogType[]>([]);
   const [faveFaceoff, setFaveFaceoff] = useState<boolean>(false);
+  const [indexZero, setIndexZero] = useState<boolean>();
 
   // get an array of urls for dog pictures from the API
   // associate each url with a random name and color
@@ -97,10 +98,12 @@ export default function Game(props: info) {
   // when a selection has been made the game needs to be advanced
   // pick is the dog that they clicked on
   const onDogPick = (pick: DogType) => {
-    setMatchup([
-      { image: "", name: "", color: "" },
-      { image: "", name: "", color: "" },
-    ]);
+    if (matchup && matchup[0] === pick) {
+      setIndexZero(true);
+    } else {
+      setIndexZero(false);
+    }
+
     setFave(pick);
     setCount((prevCount) => prevCount + 1);
   };
@@ -109,7 +112,11 @@ export default function Game(props: info) {
   // when a standard round ends the overall fave needs to be stored
   // when a fave faceoff ends the background is set to make it more special
   useEffect(() => {
-    if (fave.image != "") setMatchup([fave, dogs[count]]);
+    if (fave.image != "" && indexZero) {
+      setMatchup([fave, dogs[count]]);
+    } else {
+      setMatchup([dogs[count], fave]);
+    }
     if (count === dogs.length && !faveFaceoff) {
       const updatedFaves = [...faves];
       updatedFaves.push(fave);
