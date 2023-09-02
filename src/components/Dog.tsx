@@ -42,7 +42,7 @@ export default function Dog(props: info) {
         <LazyLoadImage
           key={props.dog.name} // setting the key ensures the placeholder loads in between matchups, seems to be a idiosyncracy of the library
           id="picture"
-          className="h-[300px] w-[400px] object-contain"
+          className="h-[300px] w-[400px] lg:h-[375px] lg:w-[500px] xl:h-[450px] xl:w-[600px] 2xl:h-[525px] xl:w-[700px] object-contain"
           alt="a randomly selected picture of a dog"
           src={props.dog.image}
           placeholderSrc="favicon.png"
