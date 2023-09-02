@@ -103,7 +103,6 @@ export default function Game(props: info) {
     } else {
       setIndexZero(false);
     }
-
     setFave(pick);
     setCount((prevCount) => prevCount + 1);
   };
@@ -183,7 +182,7 @@ export default function Game(props: info) {
     return (
       <div
         id="game"
-        className="flex flex-col flex-wrap justify-center  items-center"
+        className="flex flex-col flex-wrap justify-center items-center"
       >
         <Dog dog={fave} fave={true} dream={faveFaceoff} />
         <div id="controls" className="m-8 flex flex-wrap justify-center">

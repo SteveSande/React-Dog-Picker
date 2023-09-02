@@ -11,7 +11,7 @@ export default function App() {
   return (
     <div
       id="page"
-      className={`flex flex-col select-none h-screen ${background}`}
+      className={`flex flex-col select-none h-screen justify-center ${background}`}
     >
       <Header />
       <Game setBackground={setBackground} />
