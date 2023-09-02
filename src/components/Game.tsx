@@ -113,7 +113,7 @@ export default function Game(props: info) {
   useEffect(() => {
     if (fave.image != "" && indexZero) {
       setMatchup([fave, dogs[count]]);
-    } else {
+    } else if (fave.image) {
       setMatchup([dogs[count], fave]);
     }
     if (count === dogs.length && !faveFaceoff) {
