@@ -6,12 +6,6 @@ import { Button } from "ariakit";
 interface info {
   /** This is a setState function that is passed in from the App component. It sets the background of the page. */
   setBackground: Function;
-  /** [Storybook Use Only] This indicates whether the API call should execute or not. */
-  story?: boolean;
-  /** [Storybook Use Only] This is a predefined matchup to use instead of actual game data. */
-  storyMatchup?: DogType[];
-  /** [Storybook Use Only] This is a predefined fave to use in place of actual game data. */
-  storyFave?: DogType;
 }
 
 /** The Game component presents the different states of the game.
@@ -36,7 +30,7 @@ export default function Game(props: info) {
   // the game starts after the states are set
   // the API call is not necessary when it's a fave faceoff round or when Storybook is being used
   useEffect(() => {
-    if (props.story === undefined && !faveFaceoff) {
+    if (!faveFaceoff) {
       fetch("https://dog.ceo/api/breeds/image/random/10")
         .then((response) => response.json())
         .then((data) => {
@@ -75,23 +69,7 @@ export default function Game(props: info) {
           setMatchup(dogsToCopy.slice(0, 2));
           setLoading(false);
         });
-      // this code is specific to Storybook
-      // it skips the API call and sets up data manually
-    } else if (props.story != undefined) {
-      if (props.storyMatchup != undefined) {
-        setDogs([
-          { image: "", name: "", color: "" },
-          { image: "", name: "", color: "" },
-        ]);
-        setMatchup(props.storyMatchup);
-        setLoading(false);
       }
-      if (props.storyFave != undefined) {
-        setFave(props.storyFave);
-        setCount(10);
-        setLoading(false);
-      }
-    }
   }, [rounds]);
 
   // this function is executed when the user has selected a dog from a matchup
