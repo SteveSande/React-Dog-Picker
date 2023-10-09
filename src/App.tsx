@@ -9,7 +9,7 @@ export default function App() {
   const [background, setBackground] = useState<string>(""); // suggested attribution style <a href="https://www.freeiconspng.com/img/35432">hearts tumblr png</a>
 
   return (
-    <div className="h-screen bg-black">
+    <div className="h-screen">
       <div id="page" className={`flex flex-col select-none ${background}`}>
         <Header />
         <Game setBackground={setBackground} />
