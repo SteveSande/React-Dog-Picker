@@ -2,6 +2,7 @@ import Dog from "./Dog";
 import { useState, useEffect } from "react";
 import Names from "../assets/dognames.json";
 import { Button } from "ariakit";
+import { useLocalStorage } from "usehooks-ts";
 
 interface info {
   /** This is a setState function that is passed in from the App component. It sets the background of the page. */
@@ -14,15 +15,15 @@ interface info {
  * Finally there is a end screen where the persons fave or dream dog is presented.
  */
 export default function Game(props: info) {
-  const [dogs, setDogs] = useState<DogType[]>([]);
-  const [fave, setFave] = useState<DogType>({ image: "", name: "", color: "" });
-  const [count, setCount] = useState<number>(1);
-  const [matchup, setMatchup] = useState<DogType[]>();
-  const [loading, setLoading] = useState<boolean>(true);
-  const [rounds, setRounds] = useState<number>(1);
-  const [faves, setFaves] = useState<DogType[]>([]);
-  const [faveFaceoff, setFaveFaceoff] = useState<boolean>(false);
-  const [indexZero, setIndexZero] = useState<boolean>();
+  const [dogs, setDogs] = useLocalStorage<DogType[]>('dogs', []);
+  const [fave, setFave] = useLocalStorage<DogType>('test', { image: "", name: "", color: "" });
+  const [count, setCount] = useLocalStorage<number>('count', 1);
+  const [matchup, setMatchup] = useLocalStorage<DogType[]>('matchup', []);
+  const [loading, setLoading] = useLocalStorage<boolean>('loading',true);
+  const [rounds, setRounds] = useLocalStorage<number>('rounds', 1);
+  const [faves, setFaves] = useLocalStorage<DogType[]>('faves', []);
+  const [faveFaceoff, setFaveFaceoff] = useLocalStorage<boolean>('faveFaceoff', false);
+  const [indexZero, setIndexZero] = useLocalStorage<boolean>('indexZero', true);
 
   // get an array of urls for dog pictures from the API
   // associate each url with a random name and color
@@ -30,7 +31,7 @@ export default function Game(props: info) {
   // the game starts after the states are set
   // the API call is not necessary when it's a fave faceoff round or when Storybook is being used
   useEffect(() => {
-    if (!faveFaceoff) {
+    if (dogs.length === 0 && !faveFaceoff) {
       fetch("https://dog.ceo/api/breeds/image/random/10")
         .then((response) => response.json())
         .then((data) => {
@@ -70,6 +71,11 @@ export default function Game(props: info) {
           setLoading(false);
         });
       }
+      else if (dogs.length != 0) {
+        setMatchup(dogs.slice(0, 2));
+      }
+
+      
   }, [rounds]);
 
   // this function is executed when the user has selected a dog from a matchup
@@ -101,7 +107,7 @@ export default function Game(props: info) {
     } else if (count === dogs.length && faveFaceoff) {
       props.setBackground('bg-[url("/src/assets/hearts.png")]');
     }
-  }, [fave, count]);
+  }, [localStorage.getItem('fave'), count]);
 
   // the user has started a new round
   // several states need to be set to properly launch it
@@ -113,6 +119,7 @@ export default function Game(props: info) {
     setFave({ image: "", name: "", color: "" });
     setCount(1);
     setRounds((prevRounds) => (prevRounds += 1));
+    setDogs([]);  
   };
 
   // the user has started a fave faceoff
