@@ -156,7 +156,7 @@ export default function Game(props: info) {
     );
   } else if (matchup && count < dogs.length) {
     return (
-      <div id="game" className="flex flex-wrap justify-center">
+      <div id="game" className="flex flex-wrap justify-center m-3">
         {matchup.map((dog, index) => (
           <Dog
             key={index}
@@ -174,7 +174,7 @@ export default function Game(props: info) {
         className="flex flex-col flex-wrap justify-center items-center"
       >
         <Dog dog={fave} fave={true} dream={faveFaceoff} />
-        <div id="controls" className="m-8 flex flex-wrap justify-center">
+        <div id="controls" className="m-3 flex flex-wrap justify-center">
           <Button
             id="new-round"
             className="m-2 bg-green-700 p-3 text-xl font-bold text-white rounded-lg"

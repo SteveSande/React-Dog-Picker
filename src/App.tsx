@@ -23,7 +23,7 @@ export default function App() {
   }, [darkMode]);
 
   return (
-    <div id="page" className={`h-screen ${bgColor} ${background}`}>
+    <div id="page" className={`h-max min-h-screen ${bgColor} ${background}`}>
       <header className="flex justify-center p-8 w-screen">
         <div className="w-1/5"></div>
         <Header />
