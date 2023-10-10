@@ -1,10 +1,10 @@
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 import { darkModeAtom } from "../utils/atom.ts";
 import { useEffect, useState } from "react";
 
 /** The Header component introduces the game to the user and provides instructions for playing. */
 export default function Header() {
-  const [darkMode, setDarkMode] = useAtom(darkModeAtom);
+  const [darkMode] = useAtom(darkModeAtom);
   const [textColor, setTextColor] = useState<String>("text-black");
 
   useEffect(() => {

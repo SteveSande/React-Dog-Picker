@@ -1,15 +1,10 @@
 import { Button } from "ariakit";
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 import { darkModeAtom } from "../utils/atom.ts";
-import { useLocalStorage } from "usehooks-ts";
 import { useEffect, useState } from "react";
 
 export default function DarkToggle() {
   const [darkMode, setDarkMode] = useAtom(darkModeAtom);
-  const [darkModeLS, setDarkModeLS] = useLocalStorage<boolean>(
-    "darkMode",
-    false
-  );
   const [bgColor, setBgColor] = useState<String>("bg-black");
   const [textColor, setTextColor] = useState<String>("text-white");
 
@@ -18,6 +13,8 @@ export default function DarkToggle() {
   };
 
   useEffect(() => {
+    localStorage.setItem("darkMode", darkMode.toString());
+
     if (darkMode) {
       setBgColor("bg-white");
       setTextColor("text-black");
@@ -25,8 +22,6 @@ export default function DarkToggle() {
       setBgColor("bg-black");
       setTextColor("text-white");
     }
-
-    setDarkModeLS(darkMode);
   }, [darkMode]);
 
   return (

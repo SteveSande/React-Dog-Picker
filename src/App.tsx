@@ -3,7 +3,7 @@ import DarkToggle from "./components/DarkToggle";
 import Game from "./components/Game";
 import Header from "./components/Header";
 import { useEffect, useState } from "react";
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 import { darkModeAtom } from "./utils/atom.ts";
 
 /** This is a fun game developed specifically to practice using React and other JavaScript libraries.
@@ -11,7 +11,7 @@ import { darkModeAtom } from "./utils/atom.ts";
  */
 export default function App() {
   const [background, setBackground] = useState<string>(""); // suggested attribution style <a href="https://www.freeiconspng.com/img/35432">hearts tumblr png</a>
-  const [darkMode, setDarkMode] = useAtom(darkModeAtom);
+  const [darkMode] = useAtom(darkModeAtom);
   const [bgColor, setBgColor] = useState<String>("bg-white");
 
   useEffect(() => {

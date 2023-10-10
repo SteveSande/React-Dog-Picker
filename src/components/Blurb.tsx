@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { darkModeAtom } from "../utils/atom";
 
 export default function Blurb() {
-  const [darkMode, setDarkMode] = useAtom(darkModeAtom);
+  const [darkMode] = useAtom(darkModeAtom);
   const [textColor, setTextColor] = useState<String>("text-black");
 
   useEffect(() => {
