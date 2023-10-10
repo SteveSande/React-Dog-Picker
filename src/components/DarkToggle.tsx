@@ -30,7 +30,7 @@ export default function DarkToggle() {
     <div id="right-side" className="w-1/5 flex justify-end items-center">
       <Button
         id="dark-toggle"
-        className={`${btnProperties} mr-10 h-fit font-bold text-white rounded-lg p-1 w-[55px]`}
+        className={`${btnProperties} mr-0 lg:mr-10 lg:mr-10 h-fit font-bold rounded-lg p-1 w-[55px]`}
         onClick={toggleDarkMode}
       >
         {text}
