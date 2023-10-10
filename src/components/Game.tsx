@@ -16,7 +16,7 @@ interface info {
  */
 export default function Game(props: info) {
   const [dogs, setDogs] = useLocalStorage<DogType[]>("dogs", []);
-  const [fave, setFave] = useLocalStorage<DogType>("test", {
+  const [fave, setFave] = useLocalStorage<DogType>("fave", {
     image: "",
     name: "",
     color: "",
@@ -104,7 +104,10 @@ export default function Game(props: info) {
     } else if (fave.image) {
       setMatchup([dogs[count], fave]);
     }
-    if (count === dogs.length && !faveFaceoff) {
+    const alreadyContainsFave = faves.some(
+      (dog) => JSON.stringify(dog) === JSON.stringify(fave)
+    );
+    if (count === dogs.length && !faveFaceoff && !alreadyContainsFave) {
       const updatedFaves = [...faves];
       updatedFaves.push(fave);
       setFaves(updatedFaves);
