@@ -14,7 +14,7 @@ export default function DarkToggle() {
   };
 
   useEffect(() => {
-    console.log("trigger");
+    localStorage.setItem("darkMode", darkMode.toString());
 
     if (darkMode) {
       setBgColor("bg-white");
@@ -31,7 +31,7 @@ export default function DarkToggle() {
     <div id="right-side" className="w-1/5 flex justify-end items-center">
       <Button
         id="dark-toggle"
-        className={`${bgColor} ${textColor} mr-10 h-fit font-bold text-white rounded-lg p-1 w-[55px]`}
+        className={`${bgColor} mr-10 ${textColor} h-fit font-bold text-white rounded-lg p-1 w-[55px]`}
         onClick={toggleDarkMode}
       >
         {text}
