@@ -1,3 +1,5 @@
+import Blurb from "./components/Blurb";
+import DarkToggle from "./components/DarkToggle";
 import Game from "./components/Game";
 import Header from "./components/Header";
 import { useState } from "react";
@@ -9,11 +11,16 @@ export default function App() {
   const [background, setBackground] = useState<string>(""); // suggested attribution style <a href="https://www.freeiconspng.com/img/35432">hearts tumblr png</a>
 
   return (
-    <div className="h-screen">
-      <div id="page" className={`flex flex-col select-none ${background}`}>
+    <div id="page">
+      <header className="flex justify-center mb-8 mt-8 w-screen">
+        <div className="w-1/5"></div>
         <Header />
+        <DarkToggle />
+      </header>
+      <main className={`flex flex-col select-none h-screen ${background}`}>
+        <Blurb />
         <Game setBackground={setBackground} />
-      </div>
+      </main>
     </div>
   );
 }
