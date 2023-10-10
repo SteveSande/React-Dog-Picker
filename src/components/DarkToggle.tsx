@@ -5,8 +5,9 @@ import { useEffect, useState } from "react";
 
 export default function DarkToggle() {
   const [darkMode, setDarkMode] = useAtom(darkModeAtom);
-  const [bgColor, setBgColor] = useState<String>("bg-black");
-  const [textColor, setTextColor] = useState<String>("text-white");
+  const [btnProperties, setBtnProperties] = useState<String>(
+    "bg-black text-white"
+  );
   const [text, setText] = useState<String>("Dark");
 
   const toggleDarkMode = () => {
@@ -17,12 +18,10 @@ export default function DarkToggle() {
     localStorage.setItem("darkMode", darkMode.toString());
 
     if (darkMode) {
-      setBgColor("bg-white");
-      setTextColor("text-black");
+      setBtnProperties("bg-white text-black");
       setText("Light");
     } else {
-      setBgColor("bg-black");
-      setTextColor("text-white");
+      setBtnProperties("bg-black text-white");
       setText("Dark");
     }
   }, [darkMode]);
@@ -31,7 +30,7 @@ export default function DarkToggle() {
     <div id="right-side" className="w-1/5 flex justify-end items-center">
       <Button
         id="dark-toggle"
-        className={`${bgColor} mr-10 ${textColor} h-fit font-bold text-white rounded-lg p-1 w-[55px]`}
+        className={`${btnProperties} mr-10 h-fit font-bold text-white rounded-lg p-1 w-[55px]`}
         onClick={toggleDarkMode}
       >
         {text}
