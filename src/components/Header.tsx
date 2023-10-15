@@ -18,7 +18,7 @@ export default function Header() {
   return (
     <div id="title" className=" cursor-default grow">
       <h1 className={`${textColor} text-center font-bold text-5xl`}>
-        Find Your Dream Dog
+        Your Dream Dog
       </h1>
     </div>
   );
