@@ -34,7 +34,7 @@ export default function Dog(props: info) {
   return (
     <Button
       id={props.dog.name}
-      className={`flex flex-col w-fit h-fit m-2 border-solid border-black border ${props.dog.color} ${cursor}`}
+      className={`flex flex-col w-fit h-fit m-2 border-solid border-black border rounded-md ${props.dog.color} ${cursor}`}
       onClick={props.onPress}
       disabled={disabled}
     >
@@ -42,7 +42,7 @@ export default function Dog(props: info) {
         <LazyLoadImage
           key={props.dog.name} // setting the key ensures the placeholder loads in between matchups, seems to be a idiosyncracy of the library
           id="picture"
-          className="h-[300px] w-[400px] lg:h-[375px] lg:w-[500px] xl:h-[450px] xl:w-[600px] object-contain"
+          className="h-[300px] w-[400px] lg:h-[375px] lg:w-[500px] xl:h-[450px] xl:w-[600px] object-contain rounded-md"
           alt="a randomly selected picture of a dog"
           src={props.dog.image}
           placeholderSrc="favicon.png"
